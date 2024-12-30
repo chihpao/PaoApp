@@ -1,10 +1,24 @@
+import '@expo/metro-runtime';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import WelcomeScreen from './WelcomeScreen';
+import GameScreen from './GameScreen';
 
 export default function App() {
+  const [isWelcomeScreen, setIsWelcomeScreen] = useState(true);
+
+  const handlePress = () => {
+    setIsWelcomeScreen(false);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      {isWelcomeScreen ? (
+        <WelcomeScreen onPress={handlePress} />
+      ) : (
+        <GameScreen />
+      )}
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +27,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
